@@ -1,0 +1,40 @@
+import React, { useState } from 'react'
+import Buttons from './Buttons';
+import axios from '../api/axios';
+
+const AddHabit = ({ habits, setHabits }) => {
+  const [new_habit, setNewHabit] = useState('');
+ 
+  const token = localStorage.getItem("token");
+  const addHabit = async() => {
+
+    if (new_habit.trim() === '') return;
+
+    const res = await axios.post('/habits', {title: new_habit }, {
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`
+  }
+});
+    setHabits([...habits, res.data.title]);
+    setNewHabit('');
+
+  }
+  return (
+    <>
+      <div className='flex flex-col justify-center items-center'>
+        <div className=" mt-10 shadow-md w-[40vw] py-7 pb-15">
+          <div className="heading mb-6 font-medium text-center text-[2em]">
+            <h2> New Habit</h2>
+          </div>
+          <div className="form text-center">
+            <input className='p-1.5' type="text" value={new_habit} onChange={(e) => setNewHabit(e.target.value)} placeholder='Enter new habit' />
+            <button className='ml-2 bg-[#000] text-[#fff] rounded-full py-1 px-4' onClick={addHabit}> Add </button>
+          </div>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default AddHabit

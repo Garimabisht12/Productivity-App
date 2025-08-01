@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+:root{
+    background-color:#F9F9F9;
+}
+
+/* In your index.css or App.css */
+.react-calendar__month-view__days__day--weekend {
+  color: inherit !important;
+}
+
+/* Arrows */
+.react-calendar__navigation__arrow {
+  color: #23afb9; /* Tailwind blue-800 */
+  font-size: 1.3rem; /* lg */
+}
+
+/* Month and year label */
+.react-calendar__navigation__label {
+  color: #23afb9; /* Tailwind gray-800 */
+  font-weight:bold;
+  font-size: 1.3rem; /* text-lg */
+}

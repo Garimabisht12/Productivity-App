@@ -1,0 +1,26 @@
+/* 
+| Purpose            | Color Name  | HEX       |
+| ------------------ | ----------- | --------- |
+| Background (light) | Ghost White | `#F9F9F9` |
+| Card / Element BG  | Light Gray  | `#EDEDED` |
+| Border             | Silver      | `#CCCCCC` |
+| Primary Text       | Charcoal    | `#333333` |
+| Secondary Text     | Dim Gray    | `#666666` |
+| Placeholder Text   | Gray        | `#999999` |
+
+
+🌿 Button Styles
+Background: #A8D5BA
+
+Hover: #94c9a8
+
+Text color: #333333 (dark for contrast)
+
+Border-radius: 8px (optional for soft look)
+
+
+
+*/
+
+/* style override to apply Tailwind-style background */
+
