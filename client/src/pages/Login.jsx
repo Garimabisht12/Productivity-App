@@ -15,11 +15,16 @@ const Login = () => {
       const { token } = res.data;
       localStorage.setItem('token', token);
       navigate('/dashboard', { replace: true });
-      // console.log('xfdsfdg')
+     
     } catch (e) {
       console.error(e.response?.data?.message || 'Login failed');
       setFailed(true)
     }
+  }
+
+  const gotoSignup = () =>{
+    navigate('/signup')
+
   }
 
   return (
@@ -64,6 +69,9 @@ const Login = () => {
             }
             
           </form>
+          <div className="signup">
+            <button onClick={gotoSignup}>signup</button>
+          </div>
         </div>
       </div>
     </>

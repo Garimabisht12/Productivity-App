@@ -8,9 +8,9 @@ const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   
 
-  const [expense, setExpense] = useState([{title: 'lalaland',value: 85, id: self.crypto.randomUUID()},{title: 'lalaland2',value: 55, id: self.crypto.randomUUID()}, {title: 'lalaland3',value: 45, id: self.crypto.randomUUID()}])
+  const [expense, setExpense] = useState([])
     const [totalE, setTotalE] = useState(0)
-    const [habits, setHabits] = useState(['water 2L', 'Meditation']);
+    const [habits, setHabits] = useState([]);
     
 
   return (

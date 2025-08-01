@@ -14,13 +14,6 @@ const AddExpenses = ({expense, setExpense}) => {
     'Authorization': `Bearer ${token}`
   }
 });
-// localStorage.setItem("expenses", JSON.stringify(res.data))
-    //   const newEx = {
-    //   id:self.crypto.randomUUID(),
-    //   title: newExpense,
-    //   value: newExpenseValue
-    // };
-    // setExpense([...expense, newEx])
     console.log(expense)
     setNewExpense('')
     setNewExpenseValue('');
@@ -39,14 +32,16 @@ console.log(e)
     <>
     <div>
 
-      <div className="form flex flex-col">
-      <h1>Expenses</h1>
-      <form action="">
+      <div className="form flex flex-col justify-center items-center">
+        <div className=" mt-10 shadow-md w-[40vw] py-7 pb-15 ml-100">
+      <h1 className='heading mb-6 font-medium text-center text-[2em]'>Expenses</h1>
+      <form action="" className='text-center'>
         <input type="text" className='mr-8 border-5' value={newExpense} onChange={(e) => setNewExpense(e.target.value)} placeholder='Title' />
         <input type='number' placeholder='$' className='mr-5 border-5' value={newExpenseValue} onChange={(e) => setNewExpenseValue(+e.target.value)}/>
-        <button className='border-5 px-4' onClick={addE}>okay</button>
+        <button className='ml-2 bg-[#000] text-[#fff] rounded-full py-1 px-4' onClick={addE}>okay</button>
       </form>
 
+</div>
       </div>
       
     </div>
