@@ -17,6 +17,7 @@ const app = express();
 
 // __dirname replacement in ES modules
 import { fileURLToPath } from "url";
+import { json } from "stream/consumers";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -58,7 +59,7 @@ if (process.env.NODE_ENV === "production") {
 
   // For all other routes, serve index.html
   app.get("/{*splat}", (req, res) => {
-    res.sendFile(path.join(clientDistPath, "index.html"));
+    res.sendFile(path.join(clientDistPath, "index.html"), json={message:'Not Found'});
   });
 }
 
