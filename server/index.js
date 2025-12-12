@@ -59,7 +59,7 @@ if (process.env.NODE_ENV === "production") {
 
   // For all other routes, serve index.html
   app.get("/{*splat}", (req, res) => {
-    res.sendFile(path.join(clientDistPath, "index.html"), json={message:'Not Found'});
+    res.sendFile(path.join(clientDistPath, "index.html"));
   });
 }
 
