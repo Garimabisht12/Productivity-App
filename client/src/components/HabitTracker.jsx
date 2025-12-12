@@ -80,16 +80,14 @@ const computeStreaks = (entriesYMD) => {
 };
 
 const HabitTracker = ({ habit, setChanges }) => {
-  console.log("HABIT:", habit);
-console.log("habit.entries:", habit.entries);
-console.log("initial completedDates state:", completedDates);
-
+  console.log(habit.entries, 'habit entries');
   const token = localStorage.getItem('token');
   const defaultClassNames = getDefaultClassNames();
   
   const [completedDates, setCompletedDates] = useState(
   Array.isArray(habit.entries) ? habit.entries : []
 );
+console.log(completedDates, 'completed dates');
 
   const [longestStreak, setLongestStreak] = useState(habit.longestStreak || 0);
   const [currentStreak, setCurrentStreak] = useState(habit.currentStreak || 0);
@@ -100,13 +98,9 @@ console.log("initial completedDates state:", completedDates);
 
 
   useEffect(() => {
-    console.log('completedDates updated:', completedDates);
-    console.log('longestStreak before compute:', longestStreak);
     const { currentStreak: cs, longestStreak: ls } = computeStreaks(completedDates);
     setCurrentStreak(cs);
     setLongestStreak(ls);
-    console.log('completedDates updated:', completedDates);
-    console.log('longestStreak after compute:', longestStreak);
   }, [completedDates]);
 
   const handleDayClick = async (day) => {
@@ -123,9 +117,6 @@ console.log("initial completedDates state:", completedDates);
         headers: { Authorization: `Bearer ${token}` },
       });
       if (setChanges) setChanges(prev => !prev);
-      console.log("CLICK DAY:", cur_day);
-console.log("updatedDates BEFORE set:", updatedDates);
-
     } catch (err) {
       console.error(err);
     }
@@ -174,7 +165,6 @@ console.log("updatedDates BEFORE set:", updatedDates);
 
       {/* Calendar */}
       <div className="calendar flex justify-center mb-12 overflow-x-auto">
-{console.log("RENDER selectedDates:", selectedDates)}
 
         <DayPicker
   mode="multiple"
