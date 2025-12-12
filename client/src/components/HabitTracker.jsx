@@ -80,6 +80,10 @@ const computeStreaks = (entriesYMD) => {
 };
 
 const HabitTracker = ({ habit, setChanges }) => {
+  console.log("HABIT:", habit);
+console.log("habit.entries:", habit.entries);
+console.log("initial completedDates state:", completedDates);
+
   const token = localStorage.getItem('token');
   const defaultClassNames = getDefaultClassNames();
   
@@ -119,8 +123,9 @@ const HabitTracker = ({ habit, setChanges }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (setChanges) setChanges(prev => !prev);
-          console.log('completedDates updated:', completedDates);
-    console.log('longestStreak after compute:', longestStreak);
+      console.log("CLICK DAY:", cur_day);
+console.log("updatedDates BEFORE set:", updatedDates);
+
     } catch (err) {
       console.error(err);
     }
@@ -151,9 +156,7 @@ const HabitTracker = ({ habit, setChanges }) => {
           <TiDelete className="text-2xl" />
         </button>
       </div>
-{
-      console.log('completedDates updated:', completedDates)
-}
+
       {/* Habit Card */}
       <div className="max-w-sm bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg shadow-sm mx-auto my-4">
         <div className="p-5 text-center">
@@ -171,6 +174,7 @@ const HabitTracker = ({ habit, setChanges }) => {
 
       {/* Calendar */}
       <div className="calendar flex justify-center mb-12 overflow-x-auto">
+{console.log("RENDER selectedDates:", selectedDates)}
 
         <DayPicker
   mode="multiple"
