@@ -4,6 +4,7 @@ import { Income, Expense } from "../models/Finance.js";
 export const getIncome = async (req, res) => {
   const incomes = await Income.find({ user: req.user });
   if (!incomes) return res.status(404).json({ message: "not found" });
+  console.log('hit income');
   res.json(incomes);
 };
 
@@ -42,6 +43,7 @@ export const deleteIncome = async (req, res) => {
 export const getExpenses = async (req, res) => {
   const expenses = await Expense.find({ user: req.user });
   if (!expenses) return res.status(404).json({ message: "not found" });
+  console.log('hit expenses');
   res.json(expenses);
 };
 
