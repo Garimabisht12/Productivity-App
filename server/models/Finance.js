@@ -1,38 +1,38 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
+// Expense schema
 const expenseSchema = new mongoose.Schema({
-     user: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
     required: true
   },
-    title: {
-        type: String,
-        required: true,
-    },
-    value: {
-        type: Number,
-        required: true
-    }
-})
-
-// incomme schema
-const incomeSchema = mongoose.Schema({
-     user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+  title: {
+    type: String,
     required: true
   },
-    title: {
-        type: String,
-        required: true,
-    },
-    value: {
-        type: Number,
-        required: true
-    }
-})
-const Income = mongoose.model('Income', incomeSchema)
-const Expense = mongoose.model('Expense', expenseSchema)
+  value: {
+    type: Number,
+    required: true
+  }
+});
 
-module.exports = {Income, Expense};
+// Income schema
+const incomeSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true
+  },
+  title: {
+    type: String,
+    required: true
+  },
+  value: {
+    type: Number,
+    required: true
+  }
+});
+
+export const Income = mongoose.model("Income", incomeSchema);
+export const Expense = mongoose.model("Expense", expenseSchema);

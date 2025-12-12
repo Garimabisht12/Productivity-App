@@ -1,91 +1,77 @@
-const express = require('express');
-const {Income, Expense}  = require('../models/Finance')
+import { Income, Expense } from "../models/Finance.js";
 
-
-// routes for income
-
-exports.getIncome = async(req, res) =>{
-    
-    const incomes = await Income.find({user: req.user });
-    if (!incomes) return res.status(404).json({message: 'not found'});
-    res.json(incomes)
-}
-
-exports.createIncome = async(req, res) =>{
-    const {title, value} = req.body;
-    const newIncome = new Income(
-        {
-            user: req.user, title, value
-        }
-    )
-    await newIncome.save();
-    res.status(201).json(newIncome)
-
+// ----------------- Income Routes -----------------
+export const getIncome = async (req, res) => {
+  const incomes = await Income.find({ user: req.user });
+  if (!incomes) return res.status(404).json({ message: "not found" });
+  res.json(incomes);
 };
 
-exports.updateIncome = async(req, res) =>{
-    const {id} = req.params;
-    const {title, value} = req.body;
-    const updatedIncome = await Income.findOneAndUpdate({_id: id, user: req.user},{
-        title, value
-    }, {new:true}
-)
-
-    await updatedIncome.save();
-    if (!updatedIncome) return res.status(404).json({message: 'income rec not found'})
-    res.json(updatedIncome)
-}
-
-exports.deleteIncome = async(req, res) =>{
-    const {id} = req.params;
-    const deleteIncome = await Income.findOneAndDelete({_id: id, user: req.user});
-
-    if (!deleteIncome) return res.status(404).json({message: 'income not found'})
-    res.json({message: 'deleted income'})
-}
-
-
-
-
-// routes for expense
-exports.getExpenses = async(req, res) =>{
-    
-    const expenses = await Expense.find({user: req.user });
-    if (!expenses) return res.status(404).json({message: 'not found'});
-    res.json(expenses)
-}
-
-exports.createExpense = async(req, res) =>{
-    const {title, value} = req.body;
-    const newExp = new Expense(
-        {
-            user: req.user, title, value
-        }
-    )
-    await newExp.save();
-    res.status(201).json(newExp)
-
+export const createIncome = async (req, res) => {
+  const { title, value } = req.body;
+  const newIncome = new Income({ user: req.user, title, value });
+  await newIncome.save();
+  res.status(201).json(newIncome);
 };
 
-exports.updateExpense = async(req, res) =>{
-    const {id} = req.params;
-    const {title, value} = req.body;
-    const updateExp = await Expense.findOneAndUpdate({_id: id, user: req.user},{
-        title, value
-    }, {new:true}
-)
+export const updateIncome = async (req, res) => {
+  const { id } = req.params;
+  const { title, value } = req.body;
+  const updatedIncome = await Income.findOneAndUpdate(
+    { _id: id, user: req.user },
+    { title, value },
+    { new: true }
+  );
 
-    await updateExp.save();
-    if (!updateExp) return res.status(404).json({message: 'expense rec not found'})
-    res.json(updateExp)
-}
+  if (!updatedIncome)
+    return res.status(404).json({ message: "income record not found" });
 
-exports.deleteExpense = async(req, res) =>{
-    const {id} = req.params;
-    const deleteExp = await Expense.findOneAndDelete({_id: id, user: req.user});
+  await updatedIncome.save();
+  res.json(updatedIncome);
+};
 
-    if (!deleteExp) return res.status(404).json({message: 'expense not found'})
-    res.json({message: 'deleted exp'})
-}
+export const deleteIncome = async (req, res) => {
+  const { id } = req.params;
+  const deletedIncome = await Income.findOneAndDelete({ _id: id, user: req.user });
 
+  if (!deletedIncome) return res.status(404).json({ message: "income not found" });
+  res.json({ message: "deleted income" });
+};
 
+// ----------------- Expense Routes -----------------
+export const getExpenses = async (req, res) => {
+  const expenses = await Expense.find({ user: req.user });
+  if (!expenses) return res.status(404).json({ message: "not found" });
+  res.json(expenses);
+};
+
+export const createExpense = async (req, res) => {
+  const { title, value } = req.body;
+  const newExp = new Expense({ user: req.user, title, value });
+  await newExp.save();
+  res.status(201).json(newExp);
+};
+
+export const updateExpense = async (req, res) => {
+  const { id } = req.params;
+  const { title, value } = req.body;
+  const updatedExp = await Expense.findOneAndUpdate(
+    { _id: id, user: req.user },
+    { title, value },
+    { new: true }
+  );
+
+  if (!updatedExp)
+    return res.status(404).json({ message: "expense record not found" });
+
+  await updatedExp.save();
+  res.json(updatedExp);
+};
+
+export const deleteExpense = async (req, res) => {
+  const { id } = req.params;
+  const deletedExp = await Expense.findOneAndDelete({ _id: id, user: req.user });
+
+  if (!deletedExp) return res.status(404).json({ message: "expense not found" });
+  res.json({ message: "deleted expense" });
+};

@@ -1,4 +1,4 @@
-function calculateStreaks(entries = []) {
+export function calculateStreaks(entries = []) {
   if (!entries || entries.length === 0) {
     return { currentStreak: 0, longestStreak: 0 };
   }
@@ -25,17 +25,12 @@ function calculateStreaks(entries = []) {
   const lastDate = dates[dates.length - 1];
 
   if (today === lastDate) {
-    
     currentStreak = tempStreak;
   } else if (today - lastDate === 24 * 60 * 60 * 1000) {
-    
     currentStreak = tempStreak;
   } else {
-   
     currentStreak = 0;
   }
 
   return { currentStreak, longestStreak };
 }
-
-module.exports = { calculateStreaks };

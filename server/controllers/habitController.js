@@ -1,7 +1,8 @@
-const Habit = require('../models/Habits');
-const { calculateStreaks } = require('../utils/streakUtils');
+import Habit from "../models/Habits.js";
+import { calculateStreaks } from "../utils/streakUtils.js";
 
-exports.getHabits = async (req, res) => {
+// ----------------- Habit Routes -----------------
+export const getHabits = async (req, res) => {
   const habits = await Habit.find({ user: req.user });
 
   const habitsWithStreaks = habits.map((habit) => {
@@ -12,9 +13,7 @@ exports.getHabits = async (req, res) => {
   res.json(habitsWithStreaks);
 };
 
-
-
-exports.createHabit = async (req, res) => {
+export const createHabit = async (req, res) => {
   const { title, type, entries } = req.body;
   const habit = new Habit({ user: req.user, title, type, entries });
   await habit.save();
@@ -28,7 +27,7 @@ exports.createHabit = async (req, res) => {
   });
 };
 
-exports.updateHabit = async (req, res) => {
+export const updateHabit = async (req, res) => {
   const { id } = req.params;
   const { title, type, entries } = req.body;
 
@@ -38,7 +37,7 @@ exports.updateHabit = async (req, res) => {
     { new: true }
   );
 
-  if (!habit) return res.status(404).json({ message: 'habit not found' });
+  if (!habit) return res.status(404).json({ message: "habit not found" });
 
   const { currentStreak, longestStreak } = calculateStreaks(habit.entries);
 
@@ -49,11 +48,9 @@ exports.updateHabit = async (req, res) => {
   });
 };
 
-
- 
-exports.deleteHabit = async(req, res) =>{
-    const {id} = req.params;
-    const deleted = await Habit.findOneAndDelete({_id: id, user: req.user});
-    if (!deleted) return res.status(404).json({message: "Habit not found"});
-    res.json({message: 'habit deleted'})
-}
+export const deleteHabit = async (req, res) => {
+  const { id } = req.params;
+  const deleted = await Habit.findOneAndDelete({ _id: id, user: req.user });
+  if (!deleted) return res.status(404).json({ message: "Habit not found" });
+  res.json({ message: "habit deleted" });
+};

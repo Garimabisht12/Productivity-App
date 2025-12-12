@@ -1,22 +1,12 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const habitSchema = new mongoose.Schema({
-    user:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    },
-    title:{
-        type:String,
-        required: true,
-    },
-    type: {type: String, enum:['Boolean', 'number', 'text']},
-    entries: {type: Array},
-    createdAt: { type: Date, default: Date.now }
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
+  title: { type: String, required: true },
+  type: { type: String, required: true },
+  entries: [{ type: Date }]
+});
 
-})
+const Habit = mongoose.model("Habit", habitSchema);
 
-
-module.exports = mongoose.model('Habit', habitSchema)
-
-
+export default Habit;

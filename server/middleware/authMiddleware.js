@@ -1,18 +1,18 @@
-const jwt = require('jsonwebtoken')
+import jwt from "jsonwebtoken";
 
-const protect = (req, res, next) =>{
-    const authHeader = req.headers.authorization;
-    if(!authHeader || !authHeader.startsWith('Bearer '))
-         return res.status(404).json({message: 'unauthorized'})
-    const token = authHeader.split(' ')[1]
-    try{
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded.id;
-        next();
+const protect = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+  if (!authHeader || !authHeader.startsWith("Bearer "))
+    return res.status(401).json({ message: "unauthorized" });
 
-    } catch(err) {
-        res.status(401).json({message: 'invalid token'})
-    }
-}
+  const token = authHeader.split(" ")[1];
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = decoded.id;
+    next();
+  } catch (err) {
+    res.status(401).json({ message: "invalid token" });
+  }
+};
 
-module.exports =  protect
+export default protect;

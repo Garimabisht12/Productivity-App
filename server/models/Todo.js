@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const todoSchema = new mongoose.Schema({
     user:{
@@ -22,4 +22,5 @@ const todoSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Todo', todoSchema)
+const Todo = mongoose.model('Todo', todoSchema)
+export default Todo;
