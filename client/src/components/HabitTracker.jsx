@@ -119,6 +119,8 @@ const HabitTracker = ({ habit, setChanges }) => {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (setChanges) setChanges(prev => !prev);
+          console.log('completedDates updated:', completedDates);
+    console.log('longestStreak after compute:', longestStreak);
     } catch (err) {
       console.error(err);
     }
@@ -149,7 +151,9 @@ const HabitTracker = ({ habit, setChanges }) => {
           <TiDelete className="text-2xl" />
         </button>
       </div>
-
+{
+      console.log('completedDates updated:', completedDates)
+}
       {/* Habit Card */}
       <div className="max-w-sm bg-[var(--bg-primary)] border border-[var(--border-color)] rounded-lg shadow-sm mx-auto my-4">
         <div className="p-5 text-center">
