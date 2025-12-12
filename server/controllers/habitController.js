@@ -15,7 +15,7 @@ export const getHabits = async (req, res) => {
 
 export const createHabit = async (req, res) => {
   const { title, type, entries } = req.body;
-  const habit = new Habit({ user: req.user, title, type, entries });
+  const habit = new Habit({ user: req.user, title, type, entries: entries || [] });
   await habit.save();
 
   const { currentStreak, longestStreak } = calculateStreaks(habit.entries);

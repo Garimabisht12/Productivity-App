@@ -53,7 +53,7 @@ const handleBack = () => {
         habits.map((habit) =>{
         return (
           <li className="list-none mx-4" key={habit._id}>
-          <HabitTracker habit={habit} setChanges={setChanges}/>
+          <HabitTracker habit={habit} setChanges={setChanges} />
           </li>
         )
       })

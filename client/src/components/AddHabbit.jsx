@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import Buttons from './Buttons';
 import axios from '../api/axios';
+import { useEffect } from 'react';
 
 const AddHabit = ({ habits, setHabits, setChanges}) => {
   const [new_habit, setNewHabit] = useState('');
-
 
   const token = localStorage.getItem("token");
   const addHabit = async() => {
 
     if (new_habit.trim() === '') return;
-
-  const res = await axios.post('/habits', {title: new_habit, entries: [] }, {
+try{
+const res = await axios.post('/habits', {title: new_habit, entries: [] }, {
   headers: {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`
@@ -20,6 +20,12 @@ const AddHabit = ({ habits, setHabits, setChanges}) => {
     setChanges((prev) => !prev)
     setHabits([...habits, [res.data]]);
     setNewHabit('');
+}
+  catch(e) {
+console.error(e.response.data.message || 'habit adding failed');
+console.log(e)
+     
+    }
 
   }
   return (
