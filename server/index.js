@@ -57,7 +57,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(clientDistPath));
 
   // For all other routes, serve index.html
-  app.get("/*", (req, res) => {
+  app.get("/{*splat}", (req, res) => {
     res.sendFile(path.join(clientDistPath, "index.html"));
   });
 }
