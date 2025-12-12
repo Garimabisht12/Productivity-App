@@ -82,7 +82,7 @@ const computeStreaks = (entriesYMD) => {
 const HabitTracker = ({ habit, setChanges }) => {
   const token = localStorage.getItem('token');
   const defaultClassNames = getDefaultClassNames();
-
+  
   const [completedDates, setCompletedDates] = useState(
   Array.isArray(habit.entries) ? habit.entries : []
 );
@@ -163,9 +163,20 @@ const HabitTracker = ({ habit, setChanges }) => {
 
       {/* Calendar */}
       <div className="calendar flex justify-center mb-12 overflow-x-auto">
+
         <DayPicker
+  mode="multiple"
+  selected={selectedDates}
+  onDayClick={handleDayClick}
+  modifiers={{ completed: selectedDates }}
+  modifiersClassNames={{
+    completed: "completed-day"
+  }}
+/>
+
+        {/* <DayPicker
           mode="multiple"
-          selected={selectedDates}   // ✅ always valid
+          selected={selectedDates}   
           onDayClick={handleDayClick}
           disabled={{ after: new Date() }}
           showOutsideDays
@@ -174,7 +185,7 @@ const HabitTracker = ({ habit, setChanges }) => {
             selected: `bg-green-500 border-green-500 text-white`,
             chevron: `${defaultClassNames.chevron} fill-amber-500`,
           }}
-        />
+        /> */}
       </div>
     </div>
   );
