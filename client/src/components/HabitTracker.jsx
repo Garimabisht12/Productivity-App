@@ -96,9 +96,13 @@ const HabitTracker = ({ habit, setChanges }) => {
 
 
   useEffect(() => {
+    console.log('completedDates updated:', completedDates);
+    console.log('longestStreak before compute:', longestStreak);
     const { currentStreak: cs, longestStreak: ls } = computeStreaks(completedDates);
     setCurrentStreak(cs);
     setLongestStreak(ls);
+    console.log('completedDates updated:', completedDates);
+    console.log('longestStreak after compute:', longestStreak);
   }, [completedDates]);
 
   const handleDayClick = async (day) => {
