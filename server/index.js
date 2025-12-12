@@ -16,7 +16,10 @@ dotenv.config();
 const app = express();
 
 // __dirname replacement in ES modules
-const __dirname = path.resolve();
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Middleware
 if (process.env.NODE_ENV !== "production") {
@@ -41,22 +44,24 @@ app.use("/api/finance", financeRoutes);
 
 
 
+
+
+
+
+
+
 if (process.env.NODE_ENV === "production") {
+  const clientDistPath = path.join(__dirname, "../client/dist");
 
-  // app.use(express.static(clientPath));
-  console.log("In production mode");
-try{
-  app.get("/{*splat}", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client", "index.html"));
+  // Serve static files from the dist folder
+  app.use(express.static(clientDistPath));
+
+  // For all other routes, serve index.html
+  app.get("/*", (req, res) => {
+    res.sendFile(path.join(clientDistPath, "index.html"));
   });
+}
 
-} catch(e){
-  console.log(path.resolve(__dirname, '../client/dist/index.html'))
-console.log('error unknown what!! \n', e)
-console.log(e.message? e.message : 'boooo', '\n')
-console.log('shhhhh')
-}
-}
 
 
 
