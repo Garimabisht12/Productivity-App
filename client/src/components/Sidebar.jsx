@@ -1,46 +1,102 @@
-import React, { useState } from 'react'
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState } from 'react';
+import * as AiIcons from 'react-icons/ai';
+import { Link, useLocation } from 'react-router-dom';
+import { useAppContext } from '../contexts/AppContext';
+import SidebarHabit from './SidebarHabit';
 
-import {useNavigate} from 'react-router-dom';
+const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
+  const { habits } = useAppContext();
+  const [selectedHabit, setSelectedHabit] = useState(null);
+  const location = useLocation();
 
-const Sidebar = () => {
-    const [isSidebarOpen, setIsSidebarOpen] = useState(0)
-    const navigate = useNavigate()
+  const handleHabitClick = (habit) => setSelectedHabit(habit);
 
-    const gotoes = (e) => {
-        const la = e.target.value;
-        console.log(la)
-        navigate(`/${la}`, {replace:true})
-    }
+  return (
+    <>
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 w-64 h-screen bg-[var(--bg-secondary)] border-r border-[var(--border-color)] z-50 transform transition-transform duration-300 ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <div className="flex items-center h-20 px-4 border-b border-[var(--border-color)]">
+          <AiIcons.AiOutlineClose
+            onClick={() => setSidebarOpen(false)}
+            className="text-3xl font-bold cursor-pointer text-[var(--text-primary)] hover:text-[var(--text-secondary)]"
+          />
+        </div>
 
-    return (
+        {/* Main Pages Links */}
+        <ul className="mt-4 w-full space-y-2 px-4">
+          <li>
+            <Link
+              to="/dashboard"
+              className={`block px-4 py-2 rounded transition duration-200 text-[var(--text-primary)] ${
+                location.pathname === '/dashboard' 
+                  ? 'bg-[var(--bg-tertiary)] font-semibold' 
+                  : 'hover:bg-[var(--bg-tertiary)]'
+              }`}
+              onClick={() => setSidebarOpen(false)}
+            >
+              Dashboard
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/todos"
+              className={`block px-4 py-2 rounded transition duration-200 text-[var(--text-primary)] ${
+                location.pathname === '/todos' 
+                  ? 'bg-[var(--bg-tertiary)] font-semibold' 
+                  : 'hover:bg-[var(--bg-tertiary)]'
+              }`}
+              onClick={() => setSidebarOpen(false)}
+            >
+              Todos
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/finance"
+              className={`block px-4 py-2 rounded transition duration-200 text-[var(--text-primary)] ${
+                location.pathname === '/finance' 
+                  ? 'bg-[var(--bg-tertiary)] font-semibold' 
+                  : 'hover:bg-[var(--bg-tertiary)]'
+              }`}
+              onClick={() => setSidebarOpen(false)}
+            >
+              Finance Tracker
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/habit"
+              className={`block px-4 py-2 rounded transition duration-200 text-[var(--text-primary)] ${
+                location.pathname === '/habit' 
+                  ? 'bg-[var(--bg-tertiary)] font-semibold' 
+                  : 'hover:bg-[var(--bg-tertiary)]'
+              }`}
+              onClick={() => setSidebarOpen(false)}
+            >
+              Habit Tracker
+            </Link>
+          </li>
+        </ul>
+      </div>
+
+      {/* Habit Panel
+      {selectedHabit && (
         <>
-
-         
-                {/* <div className="chaveron absolute top-22 left-37.5 ">
-                <div onClick={() => setIsSidebarOpen(!isSidebarOpen)} className=" cursor-pointer p-2 hover:bg-gray-200 rounded-full transition">
-  {isSidebarOpen ? <ChevronLeft size={40} /> : <ChevronRight size={40} />}
-</div></div> */}
-            <div className="sidebar bg-[#EDEDED] flex h-screen">
-
-
-                <div className="lists mx-9">
-                    <h2 className='text-xl font-bold my-4 text-[#212529] '>Meoww</h2>
-
-                    <div className="links text-sm text-[#212529]  ">
-
-                         <p><button className='hover:bg-gray-300  py-1 px-4 rounded-lg' value={'dashboard'} onClick={gotoes}>Dashboard </button> 
-                         </p><p><button className='hover:bg-gray-300  py-1 px-4 rounded-lg' value={'todos'} onClick={gotoes}>Todos </button> 
-                         </p><p><button className='hover:bg-gray-300  py-1 px-4 rounded-lg' value={'finance'} onClick={gotoes}>Finances </button> 
-                         </p><p><button className='hover:bg-gray-300  py-1 px-4 rounded-lg' value={'habit'} onClick={gotoes}>Habits </button> 
-                         </p><p><button className='hover:bg-gray-300  py-1 px-4 rounded-lg' onClick={()=> console.log(1)}>Settings </button> 
-                        </p>
-                    </div>
-                </div>
-
-            </div>
+          <div className="fixed top-24 left-64 rounded-2xl ml-4 z-50 shadow-lg transition-transform duration-300">
+            <SidebarHabit habit={selectedHabit} />
+          </div>
+          <div
+            className="fixed inset-0 bg-black/30 backdrop-blur-sm z-30"
+            onClick={() => setSelectedHabit(null)}
+          />
         </>
-    )
-}
+      )} */}
+    </>
+  );
+};
 
-export default Sidebar
+export default Sidebar;

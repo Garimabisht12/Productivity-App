@@ -1,0 +1,92 @@
+.navbar {
+  background-color: var(--bg-secondary);
+  height: 80px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 1px 3px var(--shadow);
+}
+
+.menu-bars {
+  margin-left: 2rem;
+  font-size: 2rem;
+  background: none;
+  color: var(--text-primary);
+  cursor: pointer;
+  border: none;
+  transition: color 0.2s ease;
+}
+
+.menu-bars:hover {
+  color: var(--text-secondary);
+}
+
+.nav-menu {
+  background-color: var(--bg-secondary);
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  transition: 350ms;
+  border-right: 1px solid var(--border-color);
+  z-index: 50;
+}
+
+.nav-menu.active {
+  left: 0;
+  transition: 350ms;
+}
+
+.nav-text {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: 8px 0px 8px 16px;
+  list-style: none;
+  height: 60px;
+}
+
+.nav-text a {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-size: 18px;
+  width: 95%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.nav-text a:hover {
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
+}
+
+.nav-menu-items {
+  width: 100%;
+}
+
+.navbar-toggle {
+  background-color: var(--bg-secondary);
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+span {
+  margin-left: 16px;
+  color: var(--text-primary);
+}
+
+li {
+  color: var(--text-primary);
+}

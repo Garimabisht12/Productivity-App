@@ -13,7 +13,7 @@ const sizeClass = sizeClasses[size] ;
   
   return (
     <>
-    <button type='submit' className={`bg-black text-white rounded-full ${sizeClass} ${className}`} >{label}</button>
+    <button type='submit' className={`bg-[var(--button-bg)] text-[var(--text-primary)] rounded-full hover:bg-[var(--button-hover)] transition duration-200 ${sizeClass} ${className}`} >{label}</button>
 
     </>
 

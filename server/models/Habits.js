@@ -1,10 +1,5 @@
 const mongoose = require('mongoose');
 
-const trackerSchema = new mongoose.Schema({
-    date: { type: String, required: true }, 
-    value: { type: mongoose.Schema.Types.Mixed, required: true }
-})
-
 const habitSchema = new mongoose.Schema({
     user:{
         type: mongoose.Schema.Types.ObjectId,
@@ -16,10 +11,12 @@ const habitSchema = new mongoose.Schema({
         required: true,
     },
     type: {type: String, enum:['Boolean', 'number', 'text']},
-    entries: [trackerSchema],
+    entries: {type: Array},
     createdAt: { type: Date, default: Date.now }
 
 })
 
 
 module.exports = mongoose.model('Habit', habitSchema)
+
+

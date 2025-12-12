@@ -37,18 +37,18 @@ const MainDash = () => {
 const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold text-center mb-8">Welcome to Your Dashboard</h1>
+    <div className="min-h-screen bg-[var(--bg-primary)] p-4 sm:p-6">
+      <h1 className="text-3xl sm:text-4xl font-bold text-center mb-20 text-[var(--text-primary)]">Organize. Prioritize. Execute.</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
         {features.map((feature) => (
           <div
             key={feature.title}
             onClick={() => navigate(feature.path)}
-            className="bg-white rounded-2xl shadow-md p-6 hover:shadow-lg cursor-pointer transition-all duration-200 flex flex-col items-center"
+            className="bg-[var(--bg-secondary)] rounded-lg shadow-md p-6 hover:shadow-lg cursor-pointer transition-all duration-200 flex flex-col items-center border border-[var(--border-color)]"
           >
             <div className="text-4xl mb-4">{feature.emoji}</div>
-            <h2 className="text-xl font-semibold">{feature.title}</h2>
-            <p className="text-gray-500 text-center mt-2">{feature.description}</p>
+            <h2 className="text-xl font-semibold text-[var(--text-primary)]">{feature.title}</h2>
+            <p className="text-[var(--text-secondary)] text-center mt-2">{feature.description}</p>
           </div>
         ))}
       </div>

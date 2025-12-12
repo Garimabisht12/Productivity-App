@@ -1,45 +1,23 @@
-import React, { useEffect } from 'react'
-import Navbar from '../components/Navbar'
-import MainDash from '../components/MainDash'
-import { useNavigate } from 'react-router-dom'
-import { useAppContext } from '../contexts/AppContext'
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Layout from '../components/Layout';
+import MainDash from '../components/MainDash';
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  useEffect(()=>{
-     const token = localStorage.getItem("token");
-  if (!token) {
-    navigate("/", { replace: true });
-  }
-  }, [])
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/", { replace: true });
+    }
+  }, [navigate]);
+
   return (
-    <>
-      
-      <div className=' '>
-        {/* <div className="sidebar  ">
-          <Sidebar />
-        </div> */}
-        
-         <Navbar />
-        <div className="main w-full">
-          
-        <MainDash />
-        </div>
-      </div>
-    </>
-  )
-}
+    <Layout title="User Dashboard">
+      <MainDash />
+     </Layout> 
+  );
+};
 
-export default Dashboard
-
- {/* <Todopage /> */}
-          {/* <Habit />
-           <div className="flex flex-wrap justify-evenly">
-           {habits.map((habit) => (
-            <HabitTracker habit={habit}/>
-            // <MyItem key={item.id} title={item.title} description={item.description} />
-          ))}
-        </div> */}
-          {/* <Finance /> */}
-          {/* <DisplayExpense  /> */}
-          {/* <VisualFinance  /> */}
+export default Dashboard;

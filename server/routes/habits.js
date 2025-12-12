@@ -9,6 +9,7 @@ const {
 } = require('../controllers/habitController');
 
 router.get('/', protect, getHabits)
+// router.get('/:id', protect, getHabitById);
 router.post('/', protect, createHabit);
 router.put('/:id', protect, updateHabit);
 router.delete('/:id', protect, deleteHabit);

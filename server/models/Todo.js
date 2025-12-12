@@ -16,6 +16,9 @@ const todoSchema = new mongoose.Schema({
     },
     deadline:{
         type: String
+    },
+    order:{
+        type: Number
     }
 })
 

@@ -8,16 +8,17 @@ import Todopage from "../components/Todopage";
 import Finance from "../pages/Finance";
 import NotFound from "../pages/NotFound";
 import SignUp from "../components/SignUp";
+import HabitTracker from "../components/HabitTracker";
 
 
 export default function AppRouter(){
     return(
         
         <Routes>
-            <Route path='/' element={<Login />} />
+            <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/habit' element={<Habit />} />
-
+            {/* <Route path="/habit/:id" element={<HabitTracker />} /> */}
             {/* <Route path='/login' element={<Login />} /> */}
             {/* <Route path='/dashboard' element={
                 <UserRoute>

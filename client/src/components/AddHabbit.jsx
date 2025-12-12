@@ -2,28 +2,31 @@ import React, { useState } from 'react'
 import Buttons from './Buttons';
 import axios from '../api/axios';
 
-const AddHabit = ({ habits, setHabits }) => {
+const AddHabit = ({ habits, setHabits, setChanges}) => {
   const [new_habit, setNewHabit] = useState('');
- 
+
+
   const token = localStorage.getItem("token");
   const addHabit = async() => {
 
     if (new_habit.trim() === '') return;
 
-    const res = await axios.post('/habits', {title: new_habit }, {
+  const res = await axios.post('/habits', {title: new_habit, entries: [] }, {
   headers: {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`
   }
 });
-    setHabits([...habits, res.data.title]);
+    setChanges((prev) => !prev)
+    setHabits([...habits, [res.data]]);
     setNewHabit('');
 
   }
   return (
     <>
+     
       <div className='flex flex-col justify-center items-center'>
-        <div className=" mt-10 shadow-md w-[40vw] py-7 pb-15">
+        <div className=" mt-10  w-[40vw] py-7 pb-15">
           <div className="heading mb-6 font-medium text-center text-[2em]">
             <h2> New Habit</h2>
           </div>
@@ -33,6 +36,7 @@ const AddHabit = ({ habits, setHabits }) => {
           </div>
         </div>
       </div>
+     
     </>
   )
 }

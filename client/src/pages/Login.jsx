@@ -12,8 +12,9 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await axios.post('/auth/login', { email, password })
-      const { token } = res.data;
+      const { token, username } = res.data;
       localStorage.setItem('token', token);
+      localStorage.setItem('username', username);
       navigate('/dashboard', { replace: true });
      
     } catch (e) {
@@ -31,47 +32,44 @@ const Login = () => {
     <>
 
 
-      <div className=' flex justify-center items-center h-[100vh] ' >
-        <div className="w-[400px] py-[40px] px-[50px] bg-[#EDEDED] text-[#333333]">
+      <div className='flex justify-center items-center h-screen bg-[var(--bg-primary)]' >
+        <div className="w-full max-w-[400px] py-10 px-6 sm:px-12 bg-[var(--bg-secondary)] text-[var(--text-primary)] border border-[var(--border-color)] rounded-lg shadow-md">
           <form action=""
             onSubmit={handleLogin}>
 
-            <h1 className='text-[2rem] font-bold text-center mb-8'>Login</h1>
+            <h1 className='text-3xl font-bold text-center mb-8'>Login</h1>
             <label htmlFor="email">
-              <input type="email" onChange={e => setEmail(e.target.value)} value={email} className=' w-full my-5' name="email" id="email" placeholder='Email ID' required />
+              <input type="email" onChange={e => setEmail(e.target.value)} value={email} className='w-full my-5 bg-[var(--input-bg)] text-[var(--text-primary)] border border-[var(--border-color)] rounded px-3 py-2' name="email" id="email" placeholder='Email ID' required />
 
             </label>
 
             <label htmlFor="password">
-              <input type="password" value={password} onChange={e => setPassword(e.target.value)} className='mb-3 w-full' name="password" id="password" placeholder='Password' />
+              <input type="password" value={password} onChange={e => setPassword(e.target.value)} className='mb-3 w-full bg-[var(--input-bg)] text-[var(--text-primary)] border border-[var(--border-color)] rounded px-3 py-2' name="password" id="password" placeholder='Password' />
 
             </label>
 
-            <div className="text-[15px] remember text-[#666666] flex justify-between mt-4">
-              <label htmlFor="">
+            <div className="text-sm remember text-[var(--text-secondary)] flex justify-between mt-4">
+              <label htmlFor="" className="flex items-center gap-2">
                 <input type="checkbox" name="" id="" />Remember me
               </label>
-              <a href="#" className='text-blue-500'> Forgot Password?</a>
+              <a href="#" className='text-[var(--button-bg)] hover:text-[var(--button-hover)]'>Forgot Password?</a>
             </div>
-            <div className='my-4 '>
+            <div className='my-4'>
 
-              <Buttons label='Login' size='sm' />
+              <Buttons label='Login' size='md' className='w-full' />
             </div>
-            <div className='text-[12px] text-[#666666] '>
+            <div className='text-sm text-[var(--text-secondary)] text-center'>
 
-              <a href="#" className=''>Don't have an account? Register</a>
+              <span>Don't have an account? <button onClick={gotoSignup} className='text-[var(--button-bg)] hover:text-[var(--button-hover)] font-semibold'>Register</button></span>
             </div>
             {
-              failed && <div className="invalid text-[12px] text-[#c30010] ">
+              failed && <div className="invalid text-sm text-red-500 mt-3">
             <p>Wrong credentials</p>
 
             </div>
             }
             
           </form>
-          <div className="signup">
-            <button onClick={gotoSignup}>signup</button>
-          </div>
         </div>
       </div>
     </>
