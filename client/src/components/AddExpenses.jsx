@@ -11,7 +11,7 @@ const AddExpenses = ({setNewVal}) => {
     e.preventDefault();
     try{
       const token = localStorage.getItem("token");
-      const res = await axios.post('/finance/expense', {title: newExpense, value: newExpenseValue }, {
+      const res = await axios.post('/finance/expenses', {title: newExpense, value: newExpenseValue }, {
   headers: {
     'Content-Type': 'application/json',
     'Authorization': `Bearer ${token}`

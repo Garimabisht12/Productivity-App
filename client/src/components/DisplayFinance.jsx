@@ -13,7 +13,7 @@ const DisplayFinance = () => {
     const fetchFinance= async() =>{
     try{
       const token = localStorage.getItem('token')
-      const res = await axios.get('/finance/expense', {
+      const res = await axios.get('/finance/expenses', {
         headers: {
           Authorization: `Bearer ${token}`
         }
