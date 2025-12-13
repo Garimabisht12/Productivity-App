@@ -20,6 +20,10 @@ const SignUp = () => {
       
     }
   }
+
+  const handleBack = () => {
+    navigate(-1);
+  }
   return (
     <>
     <div className=' flex justify-center items-center h-[100vh] ' >
@@ -45,10 +49,19 @@ const SignUp = () => {
             <div className='my-4 '>
 
               <Buttons label='Sign Up' size='sm' />
+            <button onClick={() => navigate('/login')} className='ml-4'>Login</button>
             </div>
             
-            
           </form>
+          <div className="mt-6">
+          <button
+            type="button"
+            onClick={handleBack}
+            className="w-full px-4 py-3 bg-gray-200 text-gray-800 border-none rounded-lg text-base font-semibold cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:translate-y-[-2px] active:translate-y-0"
+          >
+            ← Back
+          </button>
+        </div>
         </div>
       </div>
     </>

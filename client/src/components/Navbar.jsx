@@ -35,8 +35,14 @@ const Navbar = ({ sidebarOpen, setSidebarOpen }) => {
           <BsMoon className="text-xl text-[var(--text-primary)]" />
         )}
       </button>
-      
-      <button onClick={handleLogout} className='bg-[var(--button-bg)] text-[var(--text-primary)] px-4 py-2 rounded-lg hover:bg-[var(--button-hover)] transition duration-200 font-medium'>LOGOUT</button>
+  {(localStorage.getItem('token')) && 
+    <button onClick={handleLogout} className='bg-[var(--button-bg)] text-[var(--text-primary)] px-4 py-2 rounded-lg hover:bg-[var(--button-hover)] transition duration-200 font-medium'>LOGOUT</button>
+  
+  }
+  {
+    localStorage.getItem('token')===null &&
+    <button onClick={()=>navigate('/login')} className='bg-[var(--button-bg)] text-[var(--text-primary)] px-4 py-2 rounded-lg hover:bg-[var(--button-hover)] transition duration-200 font-medium'>LOGIN</button>
+  }
     </div>
   );
 };

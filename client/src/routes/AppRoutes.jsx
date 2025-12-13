@@ -4,27 +4,23 @@ import Login from "../pages/Login";
 import Todos from "../pages/Todos";
 import Habit from "../pages/Habit";
 import Navbar from "../components/Navbar";
-import Todopage from "../components/Todopage";
+import Landing from "../pages/Landing";
 import Finance from "../pages/Finance";
 import NotFound from "../pages/NotFound";
 import SignUp from "../components/SignUp";
 import HabitTracker from "../components/HabitTracker";
+import MainDash from "../components/MainDash";
 
 
 export default function AppRouter(){
     return(
         
         <Routes>
+            <Route path='/' element={<Landing />} />
             <Route path='/login' element={<Login />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/habit' element={<Habit />} />
-            {/* <Route path="/habit/:id" element={<HabitTracker />} /> */}
-            {/* <Route path='/login' element={<Login />} /> */}
-            {/* <Route path='/dashboard' element={
-                <UserRoute>
-                    <Dashboard />
-                </UserRoute>
-            } /> */}
+           
 
             
 

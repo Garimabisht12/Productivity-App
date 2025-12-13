@@ -1,10 +1,11 @@
 import React from 'react'
 import pic from '../assets/react.svg'
-import cat from '../assets/cat.avif'
+import { useNavigate } from 'react-router-dom'
 
 import '../app.css'
 import Buttons from './Buttons'
 const Hero = () => {
+  const navigate=useNavigate();
   return (
     <div className='hero flex flex-col md:flex-row justify-around items-center min-h-screen gap-6 bg-[var(--bg-primary)] p-4 sm:p-8'>
       {/* left  */}
@@ -16,9 +17,10 @@ const Hero = () => {
         <h2 className='text-[var(--text-secondary)] text-lg md:text-xl my-4' >Organize, focus, and move forward — all in one clean space.
 
         </h2>
-        <div className="justify-self-end">
+        <div className="justify-self-end"  onClick={()=>navigate('/login')}>
 
-        <Buttons  label={'Get Started'}  />
+        <Buttons  label={'Get Started'} />
+        <button onClick={()=>navigate('/login')} className='ml-4 bg-transparent border-2 border-[var(--button-bg)] text-[var(--button-bg)] px-4 py-2 rounded-lg hover:bg-[var(--button-bg)] hover:text-[var(--text-primary)] transition duration-200 font-medium'>Login</button>
         </div>
 
 
