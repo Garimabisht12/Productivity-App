@@ -1,74 +1,97 @@
-import React, { useState } from 'react'
-import Buttons from '../components/Buttons';
-import { Link, replace, useNavigate } from 'react-router-dom';
-import axios from '../api/axios';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "../api/axios";
+import Buttons from "../components/Buttons";
+
 const SignUp = () => {
-   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('')
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
+
   const handleSignUp = async (e) => {
     e.preventDefault();
+    setError("");
+
     try {
-      const res = await axios.post('/auth/signup', {username, email, password });
-      const { token } = res.data;
-      localStorage.setItem('token', token);
-      navigate('/dashboard', { replace: true });
-     
-    } catch (e) {
-      console.error(e.response?.data?.message || 'Sign up failed');
-      
+      await axios.post("/auth/signup", {
+        username,
+        email,
+        password,
+      });
+
+      // signup successful → go to login
+      navigate("/login", { replace: true });
+    } catch (err) {
+      setError(err.response?.data?.message || "Sign up failed");
     }
-  }
+  };
 
-  const handleBack = () => {
-    navigate(-1);
-  }
   return (
-    <>
-    <div className=' flex justify-center items-center h-[100vh] ' >
-        <div className="w-[400px] py-[40px] px-[50px] bg-[#EDEDED] text-[#333333]">
-          <form action=""
-            onSubmit={handleSignUp}>
+    <div className="flex justify-center items-center h-screen">
+      <div className="w-[400px] p-10 bg-[#EDEDED] text-[#333333] rounded-lg shadow">
+        <form onSubmit={handleSignUp}>
+          <h1 className="text-2xl font-bold text-center mb-6">Sign Up</h1>
 
-            <h1 className='text-[2rem] font-bold text-center mb-8'>Sign up</h1>
-            <label htmlFor="username">
-              <input type='text' onChange={e => setUsername(e.target.value)} value={username} className=' w-full my-5' name="username" id="username" placeholder='username' required />
+          {error && (
+            <p className="text-red-600 text-sm mb-4 text-center">{error}</p>
+          )}
 
-            </label>
-            <label htmlFor="email">
-              <input type="email" onChange={e => setEmail(e.target.value)} value={email} className=' w-full my-5' name="email" id="email" placeholder='Email ID' required />
+          <input
+            type="text"
+            placeholder="Username"
+            className="w-full mb-4 p-2"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
 
-            </label>
+          <input
+            type="email"
+            placeholder="Email ID"
+            className="w-full mb-4 p-2"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-            <label htmlFor="password">
-              <input type="password" value={password} onChange={e => setPassword(e.target.value)} className='mb-3 w-full' name="password" id="password" placeholder='Password' />
+          <input
+            type="password"
+            placeholder="Password"
+            className="w-full mb-6 p-2"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-            </label>
+          <Buttons label="Sign Up" size="sm" />
 
-            <div className='my-4 '>
+          <div className="text-center mt-4">
+            <button
+              type="button"
+              onClick={() => navigate("/login")}
+              className="text-blue-600 underline"
+            >
+              Already have an account? Login
+            </button>
+          </div>
+        </form>
 
-              <Buttons label='Sign Up' size='sm' />
-            <button onClick={() => navigate('/login')} className='ml-4'>Login</button>
-            </div>
-            
-          </form>
-          <div className="mt-6">
-          <button
-            type="button"
-            onClick={handleBack}
-            className="w-full px-4 py-3 bg-gray-200 text-gray-800 border-none rounded-lg text-base font-semibold cursor-pointer transition-all duration-300 hover:bg-gray-300 hover:translate-y-[-2px] active:translate-y-0"
-          >
-            ← Back
-          </button>
-        </div>
-        </div>
+        <button
+          type="button"
+          onClick={() => navigate(-1)}
+          className="w-full mt-6 px-4 py-3 bg-gray-200 rounded-lg hover:bg-gray-300"
+        >
+          ← Back
+        </button>
       </div>
-    </>
-  )
-}
+    </div>
+  );
+};
 
-export default SignUp
+export default SignUp;
 
 
 

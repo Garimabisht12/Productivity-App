@@ -41,6 +41,7 @@ const token = localStorage.getItem("token");
         const res = await axios.get("/habits", {
           headers: { Authorization: `Bearer ${token}` },
         });
+        console.log(token)
         if (Array.isArray(res.data)) setHabits(res.data);
       } catch (e) {
         console.error("Error fetching habits:", e);

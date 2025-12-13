@@ -14,6 +14,7 @@ const Login = () => {
       const res = await axios.post('/auth/login', { email, password })
       const { token, username } = res.data;
       localStorage.setItem('token', token);
+      // console.log(token, 'token')
       localStorage.setItem('username', username);
       navigate('/dashboard', { replace: true });
      

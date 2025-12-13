@@ -33,10 +33,10 @@ export const loginUser = async (req, res) => {
     // Use bcrypt.compare in production, plain text check is insecure
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({message: 'wrong pass'});
-
+    
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: "5h" });
     const username = user.username;
-    res.status(200).json({ message: "logged in", token, username });
+    res.status(200).json({ message: "logged in", token, username, user });
   } catch (err) {
     res.status(500).json({ message: "error", error: err.message });
   }

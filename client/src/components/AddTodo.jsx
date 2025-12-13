@@ -60,9 +60,12 @@ const AddTodo = ({ todos, setTodos, setChanges, setNewVal }) => {
       const res = await axios.post('todos', { title: newTask, is_completed: false, deadline }, {
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         }
       });
+      console.log(token)
+      console.log(res.data)
+      
       setTodos([...todos, res.data]);
       setNewTask('')
       setDeadline('')
