@@ -2,7 +2,7 @@ import React from 'react'
 import pic from '../assets/react.svg'
 import { useNavigate } from 'react-router-dom'
 
-import '../../app.css'
+
 import Buttons from './Buttons'
 const Hero = () => {
   const navigate=useNavigate();
